@@ -9,6 +9,7 @@ html, body {
     margin: 0;
 
     font-family: "JetBrains Mono", sans-serif;
+    font-size: 18px;
     background-color: #10111B;
     background-image: url("assets/bg.png");
 
@@ -36,12 +37,58 @@ a {
     justify-content: center;
     flex-direction: column;
 
+    gap: 50px;
+
     line-height: 50px;
 }
 
+.blink {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    0% { opacity: 1; }
+    49% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 5px;
+}
+
+.links {
+    display: flex;
+    gap: 10px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .card {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     width: 100%;
     padding: 10px;
-    background-color: #1D1D1D40;
+    background-color: #1D1D1D77;
+    border: 2px solid #444;
+    box-shadow: 6px 6px 2px 1px #1D1D1DAA;
+}
+
+.logo-discord {
+    width: 40px;
+    height: 32px;
+}
+
+.logo-pixiv {
+    width: 32px;
+    height: 32px;
 }
