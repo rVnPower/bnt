@@ -1,5 +1,5 @@
 # BNT - Better New Tab
-![thumbnail](https://raw.githubusercontent.com/rVnPower/bnt/main/assets/thumbnail.png)
+![thumbnail](https://raw.githubusercontent.com/rVnPower/bnt/main/assets/image.png)
 
 # Preface
 This is an add-on that was made by me. The only purpose of this project is to make my new tab looks better.
