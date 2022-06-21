@@ -25,4 +25,10 @@
 		font-size: 4em;
 		text-shadow: 2px 1px 1px #777;
 	}
+
+ 	@media screen and (max-width: 500px) {
+		h1 {
+			font-size: 3em;
+		}
+	}
 </style>
