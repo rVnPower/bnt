@@ -1,0 +1,28 @@
+<script>
+ 	import { onMount } from 'svelte';
+	let time = new Date();
+
+	$: hours = (time.getHours() < 10 ? "0" : "") + time.getHours();
+	$: minutes = (time.getMinutes() < 10 ? "0" : "") + time.getMinutes();
+	$: seconds = (time.getSeconds() < 10 ? "0" : "") + time.getSeconds();
+
+
+	onMount(() => {
+		const interval = setInterval(() => {
+			time = new Date();
+		}, 1000);
+
+		return () => {
+			clearInterval(interval);
+		};
+	});
+</script>
+
+<h1>{hours}:{minutes}:{seconds}</h1>
+
+<style>
+	h1 {
+		font-size: 4em;
+		text-shadow: 2px 1px 1px #777;
+	}
+</style>

@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    top: 0;
+    margin: 0;
+
+    height: 100vh;
+    background-image: url("bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    font-family: "JetBrains Mono", sans-serif;
+    color: #f8f8f8;
+}
