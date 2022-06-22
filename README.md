@@ -1,9 +1,11 @@
 # BNT - Better New Tab
-![thumbnail](https://raw.githubusercontent.com/rVnPower/bnt/main/assets/image.png)
+![dark preview](https://raw.githubusercontent.com/rVnPower/bnt/svelte/preview/dark.png)
+![light preview](https://raw.githubusercontent.com/rVnPower/bnt/svelte/preview/light.png)
 
 # Preface
 This is an add-on that was made by me. The only purpose of this project is to make my new tab looks better.
-I also wrote a blog on how to make this. Soon it will be here.
+
+I will also wrote a blog on how to make this. Soon it will be here.
 
 # Installation
 This add-on should work on every Chrome-based browser. Firefox-based browsers are not tested.
@@ -18,6 +20,6 @@ This add-on should work on every Chrome-based browser. Firefox-based browsers ar
 
 # About configuring
 Sadly, due to the CORS policy, configuration will not be easy to make. I tried fetching some JSON file but I could not get rid of the errors.
-
 ~~The only way you can configure this project is to modify the source code and build.~~
+
 Working on it with localStorage! Stay tuned!
