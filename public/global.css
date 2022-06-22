@@ -9,7 +9,7 @@ body {
     margin: 0;
 
     height: 100vh;
-    background-image: url("light.png");
+    background-image: url("dark.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -21,6 +21,22 @@ body {
 a {
     text-decoration: none;
     color: #f8f8f8;
+}
+
+input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: #f8f8f8;
+    margin: 0;
+    border: none;
+    border-radius: 10px;
+
+    background: rgba(0, 0, 0, 0.4);
+    font: 1.25rem / 1.5 sans-serif;
+    display: block;
+    width: 80%;
+    padding: 0.5rem 0.75rem;
 }
 
 .flex-center {

@@ -3,6 +3,8 @@
     import Clock from "./components/Clock.svelte";
     import Service from "./components/Service.svelte";
 
+    import { title } from "./store.js";
+
     const config = {
         title: "Hello, World!",
         services: [
@@ -45,24 +47,34 @@
     }
 
     let settingsMode = false;
+
+    function changeMode() {
+        settingsMode = !settingsMode;
+    }
 </script>
 
 <div class="container flex-center">
     <div class="interface">
         <div class="settings">
-            <button class="settingsBtn">
+            <button class="settingsBtn" on:click={changeMode}>
                 <img src="assets/gear.png" alt="Settings" width="40" height="40"/>
             </button>
         </div>
         {#if !settingsMode}
             <div class="header flex-center">
-                <Title title={config.title}/>
+                <Title/>
                 <Clock/>
             </div>
             <div class="services">
                 {#each config.services as service}
                     <Service {...service}/>
                 {/each}
+            </div>
+        {:else}
+            <h2>Settings</h2>
+            <div class="normal">
+                <h3>Title</h3>
+                <input bind:value={$title}>
             </div>
         {/if}
     </div>
@@ -77,10 +89,9 @@
     }
 
     .settings {
-        margin-top: 20px;
         margin-right: 40px;
 
-        height: 50px;
+        height: 90px;
         width: 100%;
 
         display: flex;
@@ -112,7 +123,6 @@
 
     .header {
         flex-direction: column;
-        padding-top: 10px;
     }
 
     .services {
@@ -124,6 +134,13 @@
         column-gap: 10px;
         row-gap: 10px;
         padding: 20px;
+    }
+
+    .normal {
+        display: box;
+        text-align: left;
+        width: 80%;
+        padding-bottom: 20px;
     }
 
     @media screen and (max-width: 1000px) {
@@ -153,6 +170,10 @@
             width: 90vw;
 
             border-radius: 30px;
+        }
+
+        .container {
+            height: auto;
         }
     }
 </style>

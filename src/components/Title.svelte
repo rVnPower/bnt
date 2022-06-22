@@ -1,8 +1,8 @@
 <script>
-    export let title;
+    import {title} from '../store.js';
 </script>
 
-<p>{title}</p>
+<p>{$title}</p>
 
 <style>
     p {
