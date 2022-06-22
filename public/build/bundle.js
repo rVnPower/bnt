@@ -4,6 +4,12 @@ var app = (function () {
     'use strict';
 
     function noop() { }
+    function assign(tar, src) {
+        // @ts-ignore
+        for (const k in src)
+            tar[k] = src[k];
+        return tar;
+    }
     function add_location(element, file, line, column, char) {
         element.__svelte_meta = {
             loc: { file, line, column, char }
@@ -204,6 +210,43 @@ var app = (function () {
             });
             block.o(local);
         }
+    }
+
+    function get_spread_update(levels, updates) {
+        const update = {};
+        const to_null_out = {};
+        const accounted_for = { $$scope: 1 };
+        let i = levels.length;
+        while (i--) {
+            const o = levels[i];
+            const n = updates[i];
+            if (n) {
+                for (const key in o) {
+                    if (!(key in n))
+                        to_null_out[key] = 1;
+                }
+                for (const key in n) {
+                    if (!accounted_for[key]) {
+                        update[key] = n[key];
+                        accounted_for[key] = 1;
+                    }
+                }
+                levels[i] = n;
+            }
+            else {
+                for (const key in o) {
+                    accounted_for[key] = 1;
+                }
+            }
+        }
+        for (const key in to_null_out) {
+            if (!(key in update))
+                update[key] = undefined;
+        }
+        return update;
+    }
+    function get_spread_object(spread_props) {
+        return typeof spread_props === 'object' && spread_props !== null ? spread_props : {};
     }
     function create_component(block) {
         block && block.c();
@@ -634,13 +677,9 @@ var app = (function () {
     	let div;
     	let img;
     	let img_src_value;
-    	let img_width_value;
-    	let img_height_value;
     	let t0;
     	let p;
-    	let t1_value = /*service*/ ctx[0].name + "";
     	let t1;
-    	let a_href_value;
 
     	const block = {
     		c: function create() {
@@ -649,16 +688,16 @@ var app = (function () {
     			img = element("img");
     			t0 = space();
     			p = element("p");
-    			t1 = text(t1_value);
-    			if (!src_url_equal(img.src, img_src_value = /*service*/ ctx[0].iconUrl)) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "width", img_width_value = /*service*/ ctx[0].iconW);
-    			attr_dev(img, "height", img_height_value = /*service*/ ctx[0].iconH);
-    			add_location(img, file$1, 7, 8, 104);
-    			add_location(p, file$1, 10, 8, 224);
-    			attr_dev(div, "class", "service svelte-cdchdu");
-    			add_location(div, file$1, 6, 4, 74);
-    			attr_dev(a, "href", a_href_value = /*service*/ ctx[0].url);
-    			add_location(a, file$1, 5, 0, 45);
+    			t1 = text(/*name*/ ctx[0]);
+    			if (!src_url_equal(img.src, img_src_value = /*iconUrl*/ ctx[2])) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "width", /*iconW*/ ctx[3]);
+    			attr_dev(img, "height", /*iconH*/ ctx[4]);
+    			add_location(img, file$1, 11, 8, 181);
+    			add_location(p, file$1, 14, 8, 271);
+    			attr_dev(div, "class", "service svelte-fl4wfh");
+    			add_location(div, file$1, 10, 4, 151);
+    			attr_dev(a, "href", /*url*/ ctx[1]);
+    			add_location(a, file$1, 9, 0, 130);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -672,22 +711,22 @@ var app = (function () {
     			append_dev(p, t1);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*service*/ 1 && !src_url_equal(img.src, img_src_value = /*service*/ ctx[0].iconUrl)) {
+    			if (dirty & /*iconUrl*/ 4 && !src_url_equal(img.src, img_src_value = /*iconUrl*/ ctx[2])) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*service*/ 1 && img_width_value !== (img_width_value = /*service*/ ctx[0].iconW)) {
-    				attr_dev(img, "width", img_width_value);
+    			if (dirty & /*iconW*/ 8) {
+    				attr_dev(img, "width", /*iconW*/ ctx[3]);
     			}
 
-    			if (dirty & /*service*/ 1 && img_height_value !== (img_height_value = /*service*/ ctx[0].iconH)) {
-    				attr_dev(img, "height", img_height_value);
+    			if (dirty & /*iconH*/ 16) {
+    				attr_dev(img, "height", /*iconH*/ ctx[4]);
     			}
 
-    			if (dirty & /*service*/ 1 && t1_value !== (t1_value = /*service*/ ctx[0].name + "")) set_data_dev(t1, t1_value);
+    			if (dirty & /*name*/ 1) set_data_dev(t1, /*name*/ ctx[0]);
 
-    			if (dirty & /*service*/ 1 && a_href_value !== (a_href_value = /*service*/ ctx[0].url)) {
-    				attr_dev(a, "href", a_href_value);
+    			if (dirty & /*url*/ 2) {
+    				attr_dev(a, "href", /*url*/ ctx[1]);
     			}
     		},
     		i: noop,
@@ -711,34 +750,53 @@ var app = (function () {
     function instance$1($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Service', slots, []);
-    	let { service } = $$props;
-    	const writable_props = ['service'];
+    	let { name } = $$props;
+    	let { url } = $$props;
+    	let { iconUrl } = $$props;
+    	let { iconW } = $$props;
+    	let { iconH } = $$props;
+    	const writable_props = ['name', 'url', 'iconUrl', 'iconW', 'iconH'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Service> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
-    		if ('service' in $$props) $$invalidate(0, service = $$props.service);
+    		if ('name' in $$props) $$invalidate(0, name = $$props.name);
+    		if ('url' in $$props) $$invalidate(1, url = $$props.url);
+    		if ('iconUrl' in $$props) $$invalidate(2, iconUrl = $$props.iconUrl);
+    		if ('iconW' in $$props) $$invalidate(3, iconW = $$props.iconW);
+    		if ('iconH' in $$props) $$invalidate(4, iconH = $$props.iconH);
     	};
 
-    	$$self.$capture_state = () => ({ service });
+    	$$self.$capture_state = () => ({ name, url, iconUrl, iconW, iconH });
 
     	$$self.$inject_state = $$props => {
-    		if ('service' in $$props) $$invalidate(0, service = $$props.service);
+    		if ('name' in $$props) $$invalidate(0, name = $$props.name);
+    		if ('url' in $$props) $$invalidate(1, url = $$props.url);
+    		if ('iconUrl' in $$props) $$invalidate(2, iconUrl = $$props.iconUrl);
+    		if ('iconW' in $$props) $$invalidate(3, iconW = $$props.iconW);
+    		if ('iconH' in $$props) $$invalidate(4, iconH = $$props.iconH);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [service];
+    	return [name, url, iconUrl, iconW, iconH];
     }
 
     class Service extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { service: 0 });
+
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {
+    			name: 0,
+    			url: 1,
+    			iconUrl: 2,
+    			iconW: 3,
+    			iconH: 4
+    		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -750,16 +808,64 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*service*/ ctx[0] === undefined && !('service' in props)) {
-    			console.warn("<Service> was created without expected prop 'service'");
+    		if (/*name*/ ctx[0] === undefined && !('name' in props)) {
+    			console.warn("<Service> was created without expected prop 'name'");
+    		}
+
+    		if (/*url*/ ctx[1] === undefined && !('url' in props)) {
+    			console.warn("<Service> was created without expected prop 'url'");
+    		}
+
+    		if (/*iconUrl*/ ctx[2] === undefined && !('iconUrl' in props)) {
+    			console.warn("<Service> was created without expected prop 'iconUrl'");
+    		}
+
+    		if (/*iconW*/ ctx[3] === undefined && !('iconW' in props)) {
+    			console.warn("<Service> was created without expected prop 'iconW'");
+    		}
+
+    		if (/*iconH*/ ctx[4] === undefined && !('iconH' in props)) {
+    			console.warn("<Service> was created without expected prop 'iconH'");
     		}
     	}
 
-    	get service() {
+    	get name() {
     		throw new Error("<Service>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set service(value) {
+    	set name(value) {
+    		throw new Error("<Service>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get url() {
+    		throw new Error("<Service>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set url(value) {
+    		throw new Error("<Service>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get iconUrl() {
+    		throw new Error("<Service>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set iconUrl(value) {
+    		throw new Error("<Service>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get iconW() {
+    		throw new Error("<Service>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set iconW(value) {
+    		throw new Error("<Service>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get iconH() {
+    		throw new Error("<Service>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set iconH(value) {
     		throw new Error("<Service>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -769,57 +875,12 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[1] = list[i];
+    	child_ctx[2] = list[i];
     	return child_ctx;
     }
 
-    // (55:12) {#each config.services as service}
-    function create_each_block(ctx) {
-    	let service;
-    	let current;
-
-    	service = new Service({
-    			props: { service: /*service*/ ctx[1] },
-    			$$inline: true
-    		});
-
-    	const block = {
-    		c: function create() {
-    			create_component(service.$$.fragment);
-    		},
-    		m: function mount(target, anchor) {
-    			mount_component(service, target, anchor);
-    			current = true;
-    		},
-    		p: noop,
-    		i: function intro(local) {
-    			if (current) return;
-    			transition_in(service.$$.fragment, local);
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			transition_out(service.$$.fragment, local);
-    			current = false;
-    		},
-    		d: function destroy(detaching) {
-    			destroy_component(service, detaching);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_each_block.name,
-    		type: "each",
-    		source: "(55:12) {#each config.services as service}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    function create_fragment(ctx) {
-    	let div3;
-    	let div2;
+    // (57:8) {#if !settingsMode}
+    function create_if_block(ctx) {
     	let div0;
     	let title;
     	let t0;
@@ -848,8 +909,6 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div3 = element("div");
-    			div2 = element("div");
     			div0 = element("div");
     			create_component(title.$$.fragment);
     			t0 = space();
@@ -861,27 +920,18 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div0, "class", "header flex-center svelte-lsfrzp");
-    			add_location(div0, file, 49, 8, 1374);
-    			attr_dev(div1, "class", "services svelte-lsfrzp");
-    			add_location(div1, file, 53, 8, 1493);
-    			attr_dev(div2, "class", "interface svelte-lsfrzp");
-    			add_location(div2, file, 48, 4, 1342);
-    			attr_dev(div3, "class", "container flex-center svelte-lsfrzp");
-    			add_location(div3, file, 47, 0, 1302);
-    		},
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    			attr_dev(div0, "class", "header flex-center svelte-gln4sm");
+    			add_location(div0, file, 57, 12, 1627);
+    			attr_dev(div1, "class", "services svelte-gln4sm");
+    			add_location(div1, file, 61, 12, 1762);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div3, anchor);
-    			append_dev(div3, div2);
-    			append_dev(div2, div0);
+    			insert_dev(target, div0, anchor);
     			mount_component(title, div0, null);
     			append_dev(div0, t0);
     			mount_component(clock, div0, null);
-    			append_dev(div2, t1);
-    			append_dev(div2, div1);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, div1, anchor);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(div1, null);
@@ -889,7 +939,7 @@ var app = (function () {
 
     			current = true;
     		},
-    		p: function update(ctx, [dirty]) {
+    		p: function update(ctx, dirty) {
     			if (dirty & /*config*/ 1) {
     				each_value = /*config*/ ctx[0].services;
     				validate_each_argument(each_value);
@@ -941,10 +991,141 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div3);
+    			if (detaching) detach_dev(div0);
     			destroy_component(title);
     			destroy_component(clock);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(div1);
     			destroy_each(each_blocks, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(57:8) {#if !settingsMode}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (63:16) {#each config.services as service}
+    function create_each_block(ctx) {
+    	let service;
+    	let current;
+    	const service_spread_levels = [/*service*/ ctx[2]];
+    	let service_props = {};
+
+    	for (let i = 0; i < service_spread_levels.length; i += 1) {
+    		service_props = assign(service_props, service_spread_levels[i]);
+    	}
+
+    	service = new Service({ props: service_props, $$inline: true });
+
+    	const block = {
+    		c: function create() {
+    			create_component(service.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(service, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const service_changes = (dirty & /*config*/ 1)
+    			? get_spread_update(service_spread_levels, [get_spread_object(/*service*/ ctx[2])])
+    			: {};
+
+    			service.$set(service_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(service.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(service.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(service, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block.name,
+    		type: "each",
+    		source: "(63:16) {#each config.services as service}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment(ctx) {
+    	let div2;
+    	let div1;
+    	let div0;
+    	let button;
+    	let img;
+    	let img_src_value;
+    	let t;
+    	let current;
+    	let if_block = !/*settingsMode*/ ctx[1] && create_if_block(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div2 = element("div");
+    			div1 = element("div");
+    			div0 = element("div");
+    			button = element("button");
+    			img = element("img");
+    			t = space();
+    			if (if_block) if_block.c();
+    			if (!src_url_equal(img.src, img_src_value = "assets/gear.png")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "Settings");
+    			attr_dev(img, "width", "40");
+    			attr_dev(img, "height", "40");
+    			add_location(img, file, 53, 16, 1483);
+    			attr_dev(button, "class", "settingsBtn svelte-gln4sm");
+    			add_location(button, file, 52, 12, 1438);
+    			attr_dev(div0, "class", "settings svelte-gln4sm");
+    			add_location(div0, file, 51, 8, 1403);
+    			attr_dev(div1, "class", "interface svelte-gln4sm");
+    			add_location(div1, file, 50, 4, 1371);
+    			attr_dev(div2, "class", "container flex-center svelte-gln4sm");
+    			add_location(div2, file, 49, 0, 1331);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, div1);
+    			append_dev(div1, div0);
+    			append_dev(div0, button);
+    			append_dev(button, img);
+    			append_dev(div1, t);
+    			if (if_block) if_block.m(div1, null);
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (!/*settingsMode*/ ctx[1]) if_block.p(ctx, dirty);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div2);
+    			if (if_block) if_block.d();
     		}
     	};
 
@@ -964,7 +1145,7 @@ var app = (function () {
     	validate_slots('App', slots, []);
 
     	const config = {
-    		title: "Hello, VnPower!",
+    		title: "Hello, World!",
     		services: [
     			{
     				name: "Discord",
@@ -1004,14 +1185,30 @@ var app = (function () {
     		]
     	};
 
+    	let settingsMode = false;
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$capture_state = () => ({ Title, Clock, Service, config });
-    	return [config];
+    	$$self.$capture_state = () => ({
+    		Title,
+    		Clock,
+    		Service,
+    		config,
+    		settingsMode
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('settingsMode' in $$props) $$invalidate(1, settingsMode = $$props.settingsMode);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [config, settingsMode];
     }
 
     class App extends SvelteComponentDev {
