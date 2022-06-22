@@ -411,7 +411,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text(/*title*/ ctx[0]);
-    			attr_dev(p, "class", "svelte-o38cwh");
+    			attr_dev(p, "class", "svelte-ekbj6c");
     			add_location(p, file$3, 4, 0, 42);
     		},
     		l: function claim(nodes) {
@@ -517,7 +517,7 @@ var app = (function () {
     			t2 = text(/*minutes*/ ctx[1]);
     			t3 = text(":");
     			t4 = text(/*seconds*/ ctx[0]);
-    			attr_dev(h1, "class", "svelte-fbd13g");
+    			attr_dev(h1, "class", "svelte-dkf31n");
     			add_location(h1, file$2, 20, 0, 436);
     		},
     		l: function claim(nodes) {
@@ -655,7 +655,7 @@ var app = (function () {
     			attr_dev(img, "height", img_height_value = /*service*/ ctx[0].iconH);
     			add_location(img, file$1, 7, 8, 104);
     			add_location(p, file$1, 10, 8, 224);
-    			attr_dev(div, "class", "service svelte-1ylfqum");
+    			attr_dev(div, "class", "service svelte-cdchdu");
     			add_location(div, file$1, 6, 4, 74);
     			attr_dev(a, "href", a_href_value = /*service*/ ctx[0].url);
     			add_location(a, file$1, 5, 0, 45);
@@ -861,13 +861,13 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div0, "class", "header flex-center svelte-1yh64xb");
+    			attr_dev(div0, "class", "header flex-center svelte-lsfrzp");
     			add_location(div0, file, 49, 8, 1374);
-    			attr_dev(div1, "class", "services svelte-1yh64xb");
+    			attr_dev(div1, "class", "services svelte-lsfrzp");
     			add_location(div1, file, 53, 8, 1493);
-    			attr_dev(div2, "class", "interface svelte-1yh64xb");
+    			attr_dev(div2, "class", "interface svelte-lsfrzp");
     			add_location(div2, file, 48, 4, 1342);
-    			attr_dev(div3, "class", "container flex-center svelte-1yh64xb");
+    			attr_dev(div3, "class", "container flex-center svelte-lsfrzp");
     			add_location(div3, file, 47, 0, 1302);
     		},
     		l: function claim(nodes) {

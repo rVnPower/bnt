@@ -19,11 +19,11 @@
         justify-content: space-evenly;
 
         transition: all .5s ease;
-        border: 1px solid #777;
-        padding: 0.3em;
+        border-radius: 10px;
+        padding: 5px;
     }
 
     .service:hover {
-        background-color: #101010;
+        background: #101010;
     }
 </style>

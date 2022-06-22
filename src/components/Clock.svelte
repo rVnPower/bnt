@@ -22,7 +22,7 @@
 
 <style>
 	h1 {
-		font-size: 4em;
+		font-size: 4.5em;
 		text-shadow: 2px 1px 1px #777;
 	}
 

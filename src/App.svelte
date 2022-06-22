@@ -75,28 +75,28 @@
         line-height: 20px;
 
         background-color: #101010CF;
-        height: 80%;
-        width: 70vw;
+        width: 45%;
 
         border-radius: 30px;
     }
 
     .header {
         flex-direction: column;
-        padding-top: 100px;
+        padding-top: 60px;
     }
 
     .services {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 0.9fr 0.9fr 0.9fr;
         grid-template-rows: auto;
 
-        width: 60%;
+        width: 100%;
         column-gap: 10px;
-        row-gap: 15px;
+        row-gap: 10px;
+        padding: 20px;
     }
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 1000px) {
         .services {
             grid-template-columns: 1fr 1fr;
             width: 90%;
@@ -105,11 +105,16 @@
         .container {
             font-size: 18px;
         }
+
+        .interface {
+            width: 80%;
+        }
     }
 
     /* mobile */
     @media screen and (max-width: 500px) {
         .services {
+            grid-template-columns: 1fr;
             width: 95%;
         }
 

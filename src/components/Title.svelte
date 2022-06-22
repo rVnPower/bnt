@@ -6,6 +6,6 @@
 
 <style>
     p {
-        font-size: 1.3em;
+        font-size: 1.6em;
     }
 </style>
