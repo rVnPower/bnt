@@ -1,7 +1,7 @@
 <script>
     import Title from "./components/Title.svelte";
     import Clock from "./components/Clock.svelte";
-    import Icon from "./components/Icon.svelte";
+    import Service from "./components/Service.svelte";
 
     const config = {
         title: "Hello, VnPower!",
@@ -53,14 +53,7 @@
         </div>
         <div class="services">
             {#each config.services as service}
-                <a href="{service.url}">
-                    <div class="service">
-                        <img src="{service.iconUrl}"
-                             width="{service.iconW}"
-                             height="{service.iconH}"/>
-                        <p>{service.name}</p>
-                    </div>
-                </a>
+                <Service service="{service}"/>
             {/each}
         </div>
     </div>
@@ -82,7 +75,7 @@
         line-height: 20px;
 
         background-color: #101010CF;
-        height: 75%;
+        height: 80%;
         width: 70vw;
 
         border-radius: 30px;
@@ -120,29 +113,11 @@
             width: 95%;
         }
 
-        .service {
-            padding: 0.2em;
-        }
-
         .interface {
             height: 90%;
             width: 90vw;
 
             border-radius: 30px;
         }
-    }
-
-    .service {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-
-        transition: all .5s ease;
-        border: 1px solid #777;
-        padding: 0.6em;
-    }
-
-    .service:hover {
-        background-color: #101010;
     }
 </style>
