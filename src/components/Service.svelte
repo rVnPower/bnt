@@ -1,14 +1,18 @@
 <script>
-    export let service;
+    export let name;
+    export let url;
+    export let iconUrl;
+    export let iconW;
+    export let iconH;
 </script>
 
 
-<a href="{service.url}">
+<a href="{url}">
     <div class="service">
-        <img src="{service.iconUrl}"
-                width="{service.iconW}"
-                height="{service.iconH}"/>
-        <p>{service.name}</p>
+        <img src="{iconUrl}"
+             width="{iconW}"
+             height="{iconH}"/>
+        <p>{name}</p>
     </div>
 </a>
 
@@ -24,6 +28,6 @@
     }
 
     .service:hover {
-        background: #101010;
+        background: rgba(0, 0, 0, 0.4);
     }
 </style>

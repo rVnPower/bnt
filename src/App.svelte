@@ -4,7 +4,7 @@
     import Service from "./components/Service.svelte";
 
     const config = {
-        title: "Hello, VnPower!",
+        title: "Hello, World!",
         services: [
             {
                 name: "Discord",
@@ -43,19 +43,28 @@
             },
         ]
     }
+
+    let settingsMode = false;
 </script>
 
 <div class="container flex-center">
     <div class="interface">
-        <div class="header flex-center">
-            <Title title={config.title}/>
-            <Clock/>
+        <div class="settings">
+            <button class="settingsBtn">
+                <img src="assets/gear.png" alt="Settings" width="40" height="40"/>
+            </button>
         </div>
-        <div class="services">
-            {#each config.services as service}
-                <Service service="{service}"/>
-            {/each}
-        </div>
+        {#if !settingsMode}
+            <div class="header flex-center">
+                <Title title={config.title}/>
+                <Clock/>
+            </div>
+            <div class="services">
+                {#each config.services as service}
+                    <Service {...service}/>
+                {/each}
+            </div>
+        {/if}
     </div>
 </div>
 
@@ -67,6 +76,24 @@
         font-size: 20px;
     }
 
+    .settings {
+        margin-top: 20px;
+        margin-right: 40px;
+
+        height: 50px;
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+
+    .settingsBtn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
     .interface {
         display: flex;
         align-items: center;
@@ -74,7 +101,10 @@
 
         line-height: 20px;
 
-        background-color: #101010CF;
+        backdrop-filter: blur(5px);
+        background: rgba(0, 0, 0, 0.32);
+        box-shadow: 0px 10px 90px rgba(0, 0, 0, 1);
+
         width: 45%;
 
         border-radius: 30px;
@@ -82,7 +112,7 @@
 
     .header {
         flex-direction: column;
-        padding-top: 60px;
+        padding-top: 10px;
     }
 
     .services {
