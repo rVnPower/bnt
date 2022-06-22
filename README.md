@@ -18,4 +18,6 @@ This add-on should work on every Chrome-based browser. Firefox-based browsers ar
 
 # About configuring
 Sadly, due to the CORS policy, configuration will not be easy to make. I tried fetching some JSON file but I could not get rid of the errors.
-The only way you can configure this project is to modify the source code and build.
+
+~~The only way you can configure this project is to modify the source code and build.~~
+Working on it with localStorage! Stay tuned!
