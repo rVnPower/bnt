@@ -2,6 +2,7 @@
     import Title from "./components/Title.svelte";
     import Clock from "./components/Clock.svelte";
     import Service from "./components/Service.svelte";
+    import SettingsPage from "./components/SettingsPage.svelte";
 
     import { config } from "./store.js";
 
@@ -32,24 +33,12 @@
                 {/each}
             </div>
         {:else}
-            <h2>Settings</h2>
-            <div class="normal">
-                <h3>Title</h3>
-                <input bind:value={$config.title}>
-                <hr/>
-                <h3>Background image</h3>
-                <small><a href="https://github.com/rvnpower/bnt/README.md#bg">Read about this</a></small>
-                <input bind:value={$config.bgPath}/>
-            </div>
+            <SettingsPage/>
         {/if}
     </div>
 </div>
 
 <style>
-    small {
-        font-size: 0.7em;
-    }
-
     .container {
         width: 100%;
         height: 100vh;
@@ -110,12 +99,6 @@
         padding: 20px;
     }
 
-    .normal {
-        display: box;
-        text-align: left;
-        width: 80%;
-        padding-bottom: 20px;
-    }
 
     @media screen and (max-width: 1000px) {
         .services {
