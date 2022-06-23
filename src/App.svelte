@@ -3,48 +3,7 @@
     import Clock from "./components/Clock.svelte";
     import Service from "./components/Service.svelte";
 
-    import { title, bgPath } from "./store.js";
-
-    const config = {
-        title: "Hello, World!",
-        services: [
-            {
-                name: "Discord",
-                url: "#",
-                iconUrl: "assets/discord.png",
-                iconW: 40,
-                iconH: 32,
-            },
-            {
-                name: "Pixiv",
-                url: "https://pixiv.net",
-                iconUrl: "assets/pixiv.png",
-                iconW: 40,
-                iconH: 40,
-            },
-            {
-                name: "Facebook",
-                url: "https://facebook.com",
-                iconUrl: "assets/facebook.png",
-                iconW: 40,
-                iconH: 40,
-            },
-            {
-                name: "YouTube",
-                url: "https://youtube.com",
-                iconUrl: "assets/youtube.png",
-                iconW: 40,
-                iconH: 27,
-            },
-            {
-                name: "GitHub",
-                url: "https://github.com",
-                iconUrl: "assets/github.png",
-                iconW: 40,
-                iconH: 40,
-            },
-        ]
-    }
+    import { config } from "./store.js";
 
     let settingsMode = false;
 
@@ -54,7 +13,7 @@
 </script>
 
 <div class="container flex-center"
-     style:--bgPath="url({$bgPath})">
+     style:--bgPath="url({$config.bgPath})">
     <!-- Bind the background path into --bgPath -->
     <div class="interface">
         <div class="settings">
@@ -68,7 +27,7 @@
                 <Clock/>
             </div>
             <div class="services">
-                {#each config.services as service}
+                {#each $config.services as service}
                     <Service {...service}/>
                 {/each}
             </div>
@@ -76,10 +35,11 @@
             <h2>Settings</h2>
             <div class="normal">
                 <h3>Title</h3>
-                <input bind:value={$title}>
+                <input bind:value={$config.title}>
+                <hr/>
                 <h3>Background image</h3>
                 <small><a href="https://github.com/rvnpower/bnt/README.md#bg">Read about this</a></small>
-                <input bind:value={$bgPath}/>
+                <input bind:value={$config.bgPath}/>
             </div>
         {/if}
     </div>
