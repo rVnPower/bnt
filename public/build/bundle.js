@@ -61,6 +61,10 @@ var app = (function () {
     function component_subscribe(component, store, callback) {
         component.$$.on_destroy.push(subscribe(store, callback));
     }
+    function set_store_value(store, ret, value) {
+        store.set(value);
+        return ret;
+    }
     function append(target, node) {
         target.appendChild(node);
     }
@@ -579,11 +583,12 @@ var app = (function () {
       return stores[key];
     }
 
+    writable("title", "Hello, World!");
+    writable("bgPath", "/public/assets/dark.png");
+
     const config = writable("config", {
         title: "Hello, World!",
-
         bgPath: "/public/assets/dark.png",
-        bgUpload: null,
         services: [
             {
                 name: "Discord",
@@ -1032,7 +1037,6 @@ var app = (function () {
     	let div;
     	let h30;
     	let t3;
-    	let p;
     	let input0;
     	let t4;
     	let span;
@@ -1057,7 +1061,6 @@ var app = (function () {
     			h30 = element("h3");
     			h30.textContent = "Title";
     			t3 = space();
-    			p = element("p");
     			input0 = element("input");
     			t4 = space();
     			span = element("span");
@@ -1073,20 +1076,19 @@ var app = (function () {
     			a.textContent = "Read about this";
     			t11 = space();
     			input1 = element("input");
-    			add_location(h2, file$1, 7, 0, 95);
-    			add_location(h30, file$1, 9, 4, 140);
-    			add_location(input0, file$1, 11, 8, 171);
+    			add_location(h2, file$1, 11, 0, 158);
+    			add_location(h30, file$1, 13, 4, 203);
+    			add_location(input0, file$1, 14, 4, 222);
     			attr_dev(span, "class", "confirm button svelte-cen74h");
-    			add_location(span, file$1, 12, 8, 206);
-    			add_location(p, file$1, 10, 4, 159);
-    			add_location(hr, file$1, 14, 4, 258);
-    			add_location(h31, file$1, 15, 4, 268);
+    			add_location(span, file$1, 15, 4, 253);
+    			add_location(hr, file$1, 16, 4, 315);
+    			add_location(h31, file$1, 17, 4, 325);
     			attr_dev(a, "href", "https://github.com/rvnpower/bnt/README.md#bg");
-    			add_location(a, file$1, 16, 11, 305);
-    			add_location(small, file$1, 16, 4, 298);
-    			add_location(input1, file$1, 17, 4, 392);
+    			add_location(a, file$1, 18, 11, 362);
+    			add_location(small, file$1, 18, 4, 355);
+    			add_location(input1, file$1, 19, 4, 449);
     			attr_dev(div, "class", "settings svelte-cen74h");
-    			add_location(div, file$1, 8, 0, 113);
+    			add_location(div, file$1, 12, 0, 176);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1097,11 +1099,10 @@ var app = (function () {
     			insert_dev(target, div, anchor);
     			append_dev(div, h30);
     			append_dev(div, t3);
-    			append_dev(div, p);
-    			append_dev(p, input0);
+    			append_dev(div, input0);
     			set_input_value(input0, /*title*/ ctx[0]);
-    			append_dev(p, t4);
-    			append_dev(p, span);
+    			append_dev(div, t4);
+    			append_dev(div, span);
     			append_dev(div, t6);
     			append_dev(div, hr);
     			append_dev(div, t7);
@@ -1115,8 +1116,9 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[2]),
-    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[3])
+    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[3]),
+    					listen_dev(span, "click", /*confirm*/ ctx[2], false, false, false),
+    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[4])
     				];
 
     				mounted = true;
@@ -1160,6 +1162,11 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('SettingsPage', slots, []);
     	let title = $config.title;
+
+    	function confirm() {
+    		set_store_value(config, $config.title = title, $config);
+    	}
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -1176,7 +1183,7 @@ var app = (function () {
     		config.set($config);
     	}
 
-    	$$self.$capture_state = () => ({ config, title, $config });
+    	$$self.$capture_state = () => ({ config, title, confirm, $config });
 
     	$$self.$inject_state = $$props => {
     		if ('title' in $$props) $$invalidate(0, title = $$props.title);
@@ -1186,7 +1193,7 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [title, $config, input0_input_handler, input1_input_handler];
+    	return [title, $config, confirm, input0_input_handler, input1_input_handler];
     }
 
     class SettingsPage extends SvelteComponentDev {

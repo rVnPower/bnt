@@ -2,16 +2,18 @@
     import { config } from "../store.js";
 
     let title = $config.title;
+
+    function confirm() {
+        $config.title = title;
+    }
 </script>
 
 
 <h2>Settings</h2>
 <div class="settings">
     <h3>Title</h3>
-    <p>
-        <input bind:value={title}>
-        <span class="confirm button">OK</span>
-    </p>
+    <input bind:value={title}>
+    <span class="confirm button" on:click={confirm}>OK</span>
     <hr/>
     <h3>Background image</h3>
     <small><a href="https://github.com/rvnpower/bnt/README.md#bg">Read about this</a></small>
