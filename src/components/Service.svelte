@@ -25,9 +25,17 @@
         transition: all .5s ease;
         border-radius: 10px;
         padding: 5px;
+
+        animation-duration: 0.2s;
     }
 
     .service:hover {
+        transform: translateY(-3px);
         background: rgba(0, 0, 0, 0.4);
     }
+
+    .service:active {
+        transform: translateY(1px);
+    }
+
 </style>

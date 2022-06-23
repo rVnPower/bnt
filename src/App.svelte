@@ -10,7 +10,7 @@
         services: [
             {
                 name: "Discord",
-                url: "https://discord.com/app",
+                url: "#",
                 iconUrl: "assets/discord.png",
                 iconW: 40,
                 iconH: 32,
@@ -78,7 +78,7 @@
                 <h3>Title</h3>
                 <input bind:value={$title}>
                 <h3>Background image</h3>
-                <small>Only URL and images in the `build` folder are supported now</small>
+                <small><a href="https://github.com/rvnpower/bnt/README.md#bg">Read about this</a></small>
                 <input bind:value={$bgPath}/>
             </div>
         {/if}

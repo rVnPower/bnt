@@ -22,7 +22,22 @@ This add-on should work on every Chrome-based browser. Firefox-based browsers ar
 7. That's it! Now try to open a new tab.
 
 # About configuring
-Sadly, due to the CORS policy, configuration will not be easy to make. I tried fetching some JSON file but I could not get rid of the errors.
-~~The only way you can configure this project is to modify the source code and build.~~
+### Background images {#bg}
+If you are using local paths, then it could only be accessed if it is inside of this extension code directory/repository.
 
-Working on it with localStorage! Stay tuned!
+Example:
+
+```
+- public
+  - assets
+  | dark.png # This is accessible (/public/assets/dark.png)
+  | discord.png # This one too (/public/assets/discord.png)
+  | ...
+  - build
+  | bundle.css # The core, it will try to access the image.
+  | ...
+example.png (/example.png)
+```
+
+Currently working on select file function
+
