@@ -1,9 +1,9 @@
 <script>
-    import {title} from '../store.js';
+    import { config } from '../store.js';
 </script>
 
 <div class="title">
-    <p>{$title}</p>
+    <p>{$config.title}</p>
 </div>
 
 <style>

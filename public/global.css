@@ -30,7 +30,7 @@ input {
     -moz-appearance: none;
     color: #f8f8f8;
     margin: 0;
-    border: none;
+    border: 1px solid #000;
     border-radius: 10px;
 
     background: rgba(0, 0, 0, 0.4);
@@ -38,13 +38,17 @@ input {
     display: block;
     width: 80%;
     padding: 0.5rem 0.75rem;
+
+    transition: all .3s linear;
 }
 
+input:hover {
+    border: 1px solid #aaa;
+}
 
-@media screen and (max-width: 500px) {
-    input {
-        width: 100%;
-    }
+input:focus {
+    outline: none;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .flex-center {
@@ -52,3 +56,4 @@ input {
     justify-content: center;
     align-items: center;
 }
+

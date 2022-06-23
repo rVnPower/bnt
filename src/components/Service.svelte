@@ -8,7 +8,7 @@
 
 
 <a href="{url}">
-    <div class="service">
+    <div class="button">
         <img src="{iconUrl}"
              width="{iconW}"
              height="{iconH}"/>
@@ -17,7 +17,7 @@
 </a>
 
 <style>
-    .service {
+    .button {
         display: flex;
         align-items: center;
         justify-content: space-evenly;
@@ -29,13 +29,12 @@
         animation-duration: 0.2s;
     }
 
-    .service:hover {
+    .button:hover {
         transform: translateY(-3px);
         background: rgba(0, 0, 0, 0.4);
     }
 
-    .service:active {
+    .button:active {
         transform: translateY(1px);
     }
-
 </style>
