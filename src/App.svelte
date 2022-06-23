@@ -3,7 +3,7 @@
     import Clock from "./components/Clock.svelte";
     import Service from "./components/Service.svelte";
 
-    import { title } from "./store.js";
+    import { title, bgPath } from "./store.js";
 
     const config = {
         title: "Hello, World!",
@@ -53,7 +53,9 @@
     }
 </script>
 
-<div class="container flex-center">
+<div class="container flex-center"
+     style:--bgPath="url({$bgPath})">
+    <!-- Bind the background path into --bgPath -->
     <div class="interface">
         <div class="settings">
             <button class="settingsBtn" on:click={changeMode}>
@@ -75,15 +77,29 @@
             <div class="normal">
                 <h3>Title</h3>
                 <input bind:value={$title}>
+                <h3>Background image</h3>
+                <small>Only URL and images in the `build` folder are supported now</small>
+                <input bind:value={$bgPath}/>
             </div>
         {/if}
     </div>
 </div>
 
 <style>
+    small {
+        font-size: 0.7em;
+    }
+
     .container {
         width: 100%;
         height: 100vh;
+        min-height: 100vh;
+
+        background-image: var(--bgPath);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
 
         font-size: 20px;
     }
@@ -171,6 +187,7 @@
         }
 
         .container {
+            padding: 20px; /* avoid touching the screen */
             height: auto;
         }
     }

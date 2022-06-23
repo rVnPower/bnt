@@ -28,7 +28,7 @@
 
  	@media screen and (max-width: 500px) {
 		h1 {
-			font-size: 3em;
+			font-size: 3.4em;
 		}
 	}
 </style>

@@ -2,8 +2,11 @@
 ![dark preview](https://raw.githubusercontent.com/rVnPower/bnt/svelte/preview/dark.png)
 ![light preview](https://raw.githubusercontent.com/rVnPower/bnt/svelte/preview/light.png)
 
+Preview: https://rvnpower.github.io/bnt/public
+
 # Preface
-This is an add-on that was made by me. The only purpose of this project is to make my new tab looks better.
+This is an add-on that was inspired by [nightly](https://github.com/damnitharshit/nightly).
+The only purpose of this project is to make my new tab looks better.
 
 I will also wrote a blog on how to make this. Soon it will be here.
 
