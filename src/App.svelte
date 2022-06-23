@@ -89,10 +89,8 @@
     }
 
     .settings {
-        margin-right: 40px;
-
         height: 90px;
-        width: 100%;
+        width: 95%;
 
         display: flex;
         align-items: center;
