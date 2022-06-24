@@ -1039,7 +1039,7 @@ var app = (function () {
     	let t3;
     	let input0;
     	let t4;
-    	let span;
+    	let span0;
     	let t6;
     	let hr;
     	let t7;
@@ -1049,6 +1049,8 @@ var app = (function () {
     	let a;
     	let t11;
     	let input1;
+    	let t12;
+    	let span1;
     	let mounted;
     	let dispose;
 
@@ -1063,8 +1065,8 @@ var app = (function () {
     			t3 = space();
     			input0 = element("input");
     			t4 = space();
-    			span = element("span");
-    			span.textContent = "OK";
+    			span0 = element("span");
+    			span0.textContent = "OK";
     			t6 = space();
     			hr = element("hr");
     			t7 = space();
@@ -1076,19 +1078,24 @@ var app = (function () {
     			a.textContent = "Read about this";
     			t11 = space();
     			input1 = element("input");
-    			add_location(h2, file$1, 11, 0, 158);
-    			add_location(h30, file$1, 13, 4, 203);
-    			add_location(input0, file$1, 14, 4, 222);
-    			attr_dev(span, "class", "confirm button svelte-cen74h");
-    			add_location(span, file$1, 15, 4, 253);
-    			add_location(hr, file$1, 16, 4, 315);
-    			add_location(h31, file$1, 17, 4, 325);
+    			t12 = space();
+    			span1 = element("span");
+    			span1.textContent = "OK";
+    			add_location(h2, file$1, 8, 0, 128);
+    			add_location(h30, file$1, 10, 4, 173);
+    			add_location(input0, file$1, 11, 4, 192);
+    			attr_dev(span0, "class", "confirm button svelte-cen74h");
+    			add_location(span0, file$1, 12, 4, 223);
+    			add_location(hr, file$1, 13, 4, 305);
+    			add_location(h31, file$1, 14, 4, 315);
     			attr_dev(a, "href", "https://github.com/rvnpower/bnt/README.md#bg");
-    			add_location(a, file$1, 18, 11, 362);
-    			add_location(small, file$1, 18, 4, 355);
-    			add_location(input1, file$1, 19, 4, 449);
+    			add_location(a, file$1, 15, 11, 352);
+    			add_location(small, file$1, 15, 4, 345);
+    			add_location(input1, file$1, 16, 4, 439);
+    			attr_dev(span1, "class", "confirm button svelte-cen74h");
+    			add_location(span1, file$1, 17, 4, 472);
     			attr_dev(div, "class", "settings svelte-cen74h");
-    			add_location(div, file$1, 12, 0, 176);
+    			add_location(div, file$1, 9, 0, 146);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1102,7 +1109,7 @@ var app = (function () {
     			append_dev(div, input0);
     			set_input_value(input0, /*title*/ ctx[0]);
     			append_dev(div, t4);
-    			append_dev(div, span);
+    			append_dev(div, span0);
     			append_dev(div, t6);
     			append_dev(div, hr);
     			append_dev(div, t7);
@@ -1112,13 +1119,16 @@ var app = (function () {
     			append_dev(small, a);
     			append_dev(div, t11);
     			append_dev(div, input1);
-    			set_input_value(input1, /*$config*/ ctx[1].bgPath);
+    			set_input_value(input1, /*bgPath*/ ctx[1]);
+    			append_dev(div, t12);
+    			append_dev(div, span1);
 
     			if (!mounted) {
     				dispose = [
     					listen_dev(input0, "input", /*input0_input_handler*/ ctx[3]),
-    					listen_dev(span, "click", /*confirm*/ ctx[2], false, false, false),
-    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[4])
+    					listen_dev(span0, "click", /*click_handler*/ ctx[4], false, false, false),
+    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[5]),
+    					listen_dev(span1, "click", /*click_handler_1*/ ctx[6], false, false, false)
     				];
 
     				mounted = true;
@@ -1129,8 +1139,8 @@ var app = (function () {
     				set_input_value(input0, /*title*/ ctx[0]);
     			}
 
-    			if (dirty & /*$config*/ 2 && input1.value !== /*$config*/ ctx[1].bgPath) {
-    				set_input_value(input1, /*$config*/ ctx[1].bgPath);
+    			if (dirty & /*bgPath*/ 2 && input1.value !== /*bgPath*/ ctx[1]) {
+    				set_input_value(input1, /*bgPath*/ ctx[1]);
     			}
     		},
     		i: noop,
@@ -1158,15 +1168,11 @@ var app = (function () {
     function instance$1($$self, $$props, $$invalidate) {
     	let $config;
     	validate_store(config, 'config');
-    	component_subscribe($$self, config, $$value => $$invalidate(1, $config = $$value));
+    	component_subscribe($$self, config, $$value => $$invalidate(2, $config = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('SettingsPage', slots, []);
     	let title = $config.title;
-
-    	function confirm() {
-    		set_store_value(config, $config.title = title, $config);
-    	}
-
+    	let bgPath = $config.bgPath;
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -1178,22 +1184,34 @@ var app = (function () {
     		$$invalidate(0, title);
     	}
 
+    	const click_handler = () => set_store_value(config, $config.title = title, $config);
+
     	function input1_input_handler() {
-    		$config.bgPath = this.value;
-    		config.set($config);
+    		bgPath = this.value;
+    		$$invalidate(1, bgPath);
     	}
 
-    	$$self.$capture_state = () => ({ config, title, confirm, $config });
+    	const click_handler_1 = () => set_store_value(config, $config.bgPath = bgPath, $config);
+    	$$self.$capture_state = () => ({ config, title, bgPath, $config });
 
     	$$self.$inject_state = $$props => {
     		if ('title' in $$props) $$invalidate(0, title = $$props.title);
+    		if ('bgPath' in $$props) $$invalidate(1, bgPath = $$props.bgPath);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [title, $config, confirm, input0_input_handler, input1_input_handler];
+    	return [
+    		title,
+    		bgPath,
+    		$config,
+    		input0_input_handler,
+    		click_handler,
+    		input1_input_handler,
+    		click_handler_1
+    	];
     }
 
     class SettingsPage extends SvelteComponentDev {
