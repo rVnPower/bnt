@@ -7,10 +7,6 @@
     import { config } from "./store.js";
 
     let settingsMode = false;
-
-    function changeMode() {
-        settingsMode = !settingsMode;
-    }
 </script>
 
 <div class="container flex-center"
@@ -18,7 +14,7 @@
     <!-- Bind the background path into --bgPath -->
     <div class="interface">
         <div class="settings">
-            <button class="settingsBtn" on:click={changeMode}>
+            <button class="settingsBtn" on:click={() => settingsMode = !settingsMode}>
                 <img src="assets/gear.png" alt="Settings" width="40" height="40"/>
             </button>
         </div>

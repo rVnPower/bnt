@@ -10,12 +10,32 @@
 <div class="settings">
     <h3>Title</h3>
     <input bind:value={title}>
-    <span class="confirm button" on:click={() => $config.title = title}>OK</span>
+    <span class="confirm button"
+          on:click={() =>
+            {
+                if (title === "") {
+                    title = "Hello, World!";
+                }
+                $config.title = title;
+            }
+    }>
+        OK
+    </span>
     <hr/>
     <h3>Background image</h3>
     <small><a href="https://github.com/rvnpower/bnt/README.md#bg">Read about this</a></small>
     <input bind:value={bgPath}/>
-    <span class="confirm button" on:click={() => $config.bgPath = bgPath}>OK</span>
+    <span class="confirm button"
+          on:click={() =>
+            {
+                if (bgPath === "") {
+                    bgPath = "./assets/dark.png";
+                }
+                $config.bgPath = bgPath;
+            }
+    }>
+        OK
+    </span>
 </div>
 
 <style>
