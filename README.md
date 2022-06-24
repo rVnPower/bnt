@@ -28,18 +28,15 @@ If you are using local paths, then it could only be accessed if it is inside of 
 Example:
 
 ```
-\ bnt
- \ public
-  \ assets
-  | dark.png # This is accessible (/public/assets/dark.png or ./assets/dark.png)
-  | discord.png # This one too (/public/assets/discord.png or ./assets/light.png)
+- public
+  - assets
+  | dark.png # This is accessible (/public/assets/dark.png)
+  | discord.png # This one too (/public/assets/discord.png)
   | ...
-  /
- | bundle.css # The core, it will try to access the image.
- | global.css
- | ...
- /
-| example.png (/example.png or ../example.png)
+  - build
+  | bundle.css # The core, it will try to access the image.
+  | ...
+example.png (/example.png)
 ```
 
 Currently working on select file function
