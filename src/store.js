@@ -1,11 +1,8 @@
 import { writable } from 'svelte-local-storage-store'
 
-export const title = writable("title", "Hello, World!");
-export const bgPath = writable("bgPath", "/public/assets/dark.png");
-
 export const config = writable("config", {
     title: "Hello, World!",
-    bgPath: "/public/assets/dark.png",
+    bgPath: "./assets/dark.png",
     services: [
         {
             name: "Discord",
