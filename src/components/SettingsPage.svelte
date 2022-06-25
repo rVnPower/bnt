@@ -1,22 +1,25 @@
 <script>
     import { config } from "../store.js";
 
-    let title = $config.title;
-    let bgPath = $config.bgPath;
+    let configTemp = $config;
+
+    function checkBlank(variable, initial) {
+        if (variable === "") {
+            return initial;
+        }
+        return variable;
+    }
 </script>
 
 
 <h2>Settings</h2>
 <div class="settings">
     <h3>Title</h3>
-    <input bind:value={title}>
+    <input bind:value={configTemp.title}>
     <span class="confirm button"
           on:click={() =>
             {
-                if (title === "") {
-                    title = "Hello, World!";
-                }
-                $config.title = title;
+                $config.title = configTemp.title;
             }
     }>
         OK
@@ -24,14 +27,11 @@
     <hr/>
     <h3>Background image</h3>
     <small><a href="https://github.com/rvnpower/bnt/README.md#bg">Read about this</a></small>
-    <input bind:value={bgPath}/>
+    <input bind:value={configTemp.bgPath}/>
     <span class="confirm button"
           on:click={() =>
             {
-                if (bgPath === "") {
-                    bgPath = "./assets/dark.png";
-                }
-                $config.bgPath = bgPath;
+                $config.bgPath = checkBlank(configTemp.bgPath, "./assets/dark.png");
             }
     }>
         OK
