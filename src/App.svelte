@@ -13,11 +13,13 @@
      style:--bgPath="url({$config.bgPath})">
     <!-- Bind the background path into --bgPath -->
     <div class="interface">
+        <!-- The settings block (it will stay forever) -->
         <div class="settings">
             <button class="settingsBtn" on:click={() => settingsMode = !settingsMode}>
                 <img src="assets/gear.png" alt="Settings" width="40" height="40"/>
             </button>
         </div>
+        <!-- End settings block -->
         {#if !settingsMode}
             <div class="header flex-center">
                 <Title/>
@@ -37,7 +39,7 @@
 <style>
     .container {
         width: 100%;
-        height: 100vh;
+        height: auto;
         min-height: 100vh;
 
         background-image: var(--bgPath);

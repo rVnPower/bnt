@@ -1,4 +1,7 @@
 # BNT - Better New Tab
+
+#### This is still under development, I do not recommend using it now due to some cache stuff.
+
 ![dark preview](https://raw.githubusercontent.com/rVnPower/bnt/svelte/preview/dark.png)
 ![light preview](https://raw.githubusercontent.com/rVnPower/bnt/svelte/preview/light.png)
 
