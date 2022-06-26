@@ -14,7 +14,7 @@
 	}
     // This is the JS way to style the dragged element, notice it is being passed into the dnd-zone
     function transformDraggedElement(draggedEl, data, index) {
-        draggedEl.querySelector(".card").style.transform = "rotate(10deg)";
+        draggedEl.querySelector(".card").style.transform = "rotate(15deg)";
     }
 </script>
 
@@ -29,8 +29,11 @@
                 <div class="card">
                     {item.name}
                     <div class="tray">
-                        <div class="delete" on:click={() => console.log("debug")}>
+                        <div class="delete" on:click={() => console.log("remove")}>
                             <img src="assets/trash.png" alt="D" width="20" height="23"/>
+                        </div>
+                        <div class="edit" on:click={() => console.log("asd")}>
+                            <img src="assets/pen.png" alt="E" width="23" height="23"/>
                         </div>
                     </div>
                 </div>
@@ -75,11 +78,12 @@
 
         border: 2px solid #222;
         border-radius: 8px;
+
     }
 
     .card:hover {
         border-color: #333;
-        transform: translateY(-2px);
+        transform: translateY(-3px);
     }
 
     .add {
@@ -96,16 +100,30 @@
 
     .tray {
         display: flex;
+        gap: 5px;
     }
 
-    .delete {
-        padding: 3px;
-        cursor: pointer;
-        border-radius: 8px;
+    .card > .tray {
+        display: flex;
+        visibility: hidden;
+    }
+
+    .card:hover > .tray {
+        visibility: visible;
     }
 
     .delete:hover {
         background: rgba(255, 0, 0, 0.60);
+    }
+
+    .edit:hover {
+        background: rgba(0, 255, 0, 0.60);
+    }
+
+    .tray > div {
+        padding: 3px;
+        cursor: pointer;
+        border-radius: 8px;
     }
 
 </style>

@@ -16,6 +16,8 @@ body {
 
     font-family: "JetBrains Mono", sans-serif;
     color: #f8f8f8;
+
+    scroll-behavior: smooth;
 }
 
 a {
