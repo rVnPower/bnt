@@ -18,19 +18,35 @@
     }
 </script>
 
-<section use:dndzone={{items, flipDurationMs, transformDraggedElement}} on:consider={handleConsider} on:finalize={handleFinalize}>
-    {#each items as item(item.id)}
-        <div animate:flip={{duration:flipDurationMs}}>
-            <div class="card">
-                {item.name}
+<section>
+    <div
+        use:dndzone={{items, flipDurationMs, transformDraggedElement}}
+        on:consider={handleConsider}
+        on:finalize={handleFinalize}
+    >
+        {#each items as item(item.id)}
+            <div animate:flip={{duration:flipDurationMs}}>
+                <div class="card">
+                    {item.name}
+                    <div class="tray">
+                        <div class="delete" on:click={() => console.log("debug")}>
+                            <img src="assets/trash.png" alt="D" width="20" height="23"/>
+                        </div>
+                    </div>
+                </div>
             </div>
+        {/each}
+    </div>
+    <div>
+        <div class="card add">
+            +
         </div>
-    {/each}
+    </div>
 </section>
 
 <style>
     section {
-        width: 50%;
+        width: 70%;
         display: flex;
         flex-direction: column;
         gap: 8px;
@@ -40,24 +56,21 @@
         border: 1px solid #333;
         padding: 0.5rem 0.75rem;
 
-        transition: all .3s linear;
     }
 
     section:focus {
         outline: none;
     }
 
-    section:hover {
-        border: 1px solid #aaa;
-    }
-
     .card {
         background: rgba(0, 0, 0, 0.50);
+        cursor: pointer;
 
         display: flex;
         align-items: center;
+        justify-content: space-between;
 
-        width: 90%;
+        width: 100%;
         padding: 10px;
 
         border: 2px solid #222;
@@ -66,6 +79,33 @@
 
     .card:hover {
         border-color: #333;
-        transform: translateY(-1px);
+        transform: translateY(-2px);
     }
+
+    .add {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 2em;
+        border: 2px dashed #222;
+        cursor: pointer;
+    }
+
+    .tray {
+        display: flex;
+    }
+
+    .delete {
+        padding: 3px;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+
+    .delete:hover {
+        background: rgba(255, 0, 0, 0.60);
+    }
+
 </style>
