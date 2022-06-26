@@ -12,12 +12,18 @@
 		const {items:newItems} = e.detail;
 		onDrop(newItems);
 	}
+    // This is the JS way to style the dragged element, notice it is being passed into the dnd-zone
+    function transformDraggedElement(draggedEl, data, index) {
+        draggedEl.querySelector(".card").style.transform = "rotate(10deg)";
+    }
 </script>
 
-<section use:dndzone={{items, flipDurationMs}} on:consider={handleConsider} on:finalize={handleFinalize}>
+<section use:dndzone={{items, flipDurationMs, transformDraggedElement}} on:consider={handleConsider} on:finalize={handleFinalize}>
     {#each items as item(item.id)}
         <div animate:flip={{duration:flipDurationMs}}>
-            {item.name}
+            <div class="card">
+                {item.name}
+            </div>
         </div>
     {/each}
 </section>
@@ -45,7 +51,7 @@
         border: 1px solid #aaa;
     }
 
-    div {
+    .card {
         background: rgba(0, 0, 0, 0.50);
 
         display: flex;
@@ -56,11 +62,10 @@
 
         border: 2px solid #222;
         border-radius: 8px;
-
-        transition: all .3s linear;
     }
 
-    div:hover {
+    .card:hover {
         border-color: #333;
+        transform: translateY(-1px);
     }
 </style>
