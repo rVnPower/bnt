@@ -3260,7 +3260,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (27:8) {#each items as item(item.id)}
+    // (27:8) {#each items as item(item.name)}
     function create_each_block$1(key_1, ctx) {
     	let div4;
     	let div3;
@@ -3300,21 +3300,21 @@ var app = (function () {
     			attr_dev(img0, "alt", "D");
     			attr_dev(img0, "width", "20");
     			attr_dev(img0, "height", "23");
-    			add_location(img0, file$2, 32, 28, 1051);
-    			attr_dev(div0, "class", "delete svelte-1i0ug39");
-    			add_location(div0, file$2, 31, 24, 963);
+    			add_location(img0, file$2, 32, 28, 1053);
+    			attr_dev(div0, "class", "delete svelte-1x870g0");
+    			add_location(div0, file$2, 31, 24, 965);
     			if (!src_url_equal(img1.src, img1_src_value = "assets/pen.png")) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "E");
     			attr_dev(img1, "width", "23");
     			attr_dev(img1, "height", "23");
-    			add_location(img1, file$2, 35, 28, 1250);
-    			attr_dev(div1, "class", "edit svelte-1i0ug39");
-    			add_location(div1, file$2, 34, 24, 1167);
-    			attr_dev(div2, "class", "tray svelte-1i0ug39");
-    			add_location(div2, file$2, 30, 20, 920);
-    			attr_dev(div3, "class", "card svelte-1i0ug39");
-    			add_location(div3, file$2, 28, 16, 849);
-    			add_location(div4, file$2, 27, 12, 786);
+    			add_location(img1, file$2, 35, 28, 1252);
+    			attr_dev(div1, "class", "edit svelte-1x870g0");
+    			add_location(div1, file$2, 34, 24, 1169);
+    			attr_dev(div2, "class", "tray svelte-1x870g0");
+    			add_location(div2, file$2, 30, 20, 922);
+    			attr_dev(div3, "class", "card svelte-1x870g0");
+    			add_location(div3, file$2, 28, 16, 851);
+    			add_location(div4, file$2, 27, 12, 788);
     			this.first = div4;
     		},
     		m: function mount(target, anchor) {
@@ -3365,7 +3365,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(27:8) {#each items as item(item.id)}",
+    		source: "(27:8) {#each items as item(item.name)}",
     		ctx
     	});
 
@@ -3385,7 +3385,7 @@ var app = (function () {
     	let dispose;
     	let each_value = /*items*/ ctx[0];
     	validate_each_argument(each_value);
-    	const get_key = ctx => /*item*/ ctx[6].id;
+    	const get_key = ctx => /*item*/ ctx[6].name;
     	validate_each_keys(ctx, each_value, get_each_context$1, get_key);
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -3408,10 +3408,10 @@ var app = (function () {
     			div1 = element("div");
     			div1.textContent = "+";
     			add_location(div0, file$2, 21, 4, 579);
-    			attr_dev(div1, "class", "card add svelte-1i0ug39");
-    			add_location(div1, file$2, 43, 8, 1454);
-    			add_location(div2, file$2, 42, 4, 1440);
-    			attr_dev(section, "class", "svelte-1i0ug39");
+    			attr_dev(div1, "class", "card add svelte-1x870g0");
+    			add_location(div1, file$2, 43, 8, 1456);
+    			add_location(div2, file$2, 42, 4, 1442);
+    			attr_dev(section, "class", "svelte-1x870g0");
     			add_location(section, file$2, 20, 0, 565);
     		},
     		l: function claim(nodes) {

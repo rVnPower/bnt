@@ -24,7 +24,7 @@
         on:consider={handleConsider}
         on:finalize={handleFinalize}
     >
-        {#each items as item(item.id)}
+        {#each items as item(item.name)}
             <div animate:flip={{duration:flipDurationMs}}>
                 <div class="card">
                     {item.name}
@@ -112,18 +112,14 @@
         visibility: visible;
     }
 
-    .delete:hover {
-        background: rgba(255, 0, 0, 0.60);
-    }
-
-    .edit:hover {
-        background: rgba(0, 255, 0, 0.60);
-    }
-
     .tray > div {
         padding: 3px;
         cursor: pointer;
         border-radius: 8px;
     }
+
+    .tray > div:hover {
+        transform: translateY(-1px);
+      }
 
 </style>
