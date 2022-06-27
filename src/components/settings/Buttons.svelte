@@ -61,9 +61,11 @@
                         <div class="delete" on:click={handleRemoval(item.name)}>
                             <img src="assets/trash.png" alt="D" width="20" height="23"/>
                         </div>
+                        <!--
                         <div class="edit" on:click={() => console.log("asd")}>
                             <img src="assets/pen.png" alt="E" width="23" height="23"/>
                         </div>
+                        -->
                     </div>
                 </div>
             </div>
@@ -77,7 +79,7 @@
 </section>
 
 {#if state === "addition"}
-  <ButtonsForm state={state} item={{}} save={handleAddition}/>
+  <ButtonsForm item={{}} save={handleAddition}/>
 {/if}
 
 <style>
