@@ -26,30 +26,23 @@ a {
 }
 
 input {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    color: #f8f8f8;
-    margin: 0;
-    border: 1px solid #333;
-    border-radius: 10px;
-
-    background: rgba(0, 0, 0, 0.4);
+    border: none;
+    border-radius: 5px;
+    padding: 0.5vw 0.5vw 0.5vw 1vw;
+    width: 90%;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 0.9;
+    transition: opacity 0.2s;
     font: 1.25rem / 1.5 sans-serif;
-    display: block;
-    width: 80%;
-    padding: 0.5rem 0.75rem;
-
-    transition: all .3s linear;
 }
 
 input:hover {
-    border: 1px solid #aaa;
+    opacity: 1;
 }
 
 input:focus {
     outline: none;
-    background: rgba(0, 0, 0, 0.5);
 }
 
 .flex-center {
@@ -58,3 +51,27 @@ input:focus {
     align-items: center;
 }
 
+
+.confirm {
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 0.9;
+    width: 15%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+
+    transition: all 0.2s;
+}
+
+.confirm:hover {
+  opacity: 1;
+}
+
+.confirm:active {
+    transform: translateY(1px);
+}

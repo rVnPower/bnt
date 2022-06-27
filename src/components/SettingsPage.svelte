@@ -12,8 +12,12 @@
         return variable;
     }
 
-    // Update buttons list when dragged
+    // Update buttons list when dragged, also sort the ids
     function handleDrop(newItems) {
+        for (let i = 0; i < newItems.length; i++) {
+          newItems[i].id = i+1;
+        }
+
         $config.services = newItems;
     }
 </script>
@@ -47,7 +51,7 @@
     </span>
     <!-- Buttons -->
     <h3>Buttons</h3>
-    <Buttons items="{$config.services}" onDrop={handleDrop}/>
+    <Buttons items="{$config.services}" save={handleDrop}/>
 </div>
 
 <style>
@@ -56,24 +60,5 @@
         text-align: left;
         width: 80%;
         padding-bottom: 20px;
-    }
-
-    .confirm {
-        width: 15%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-
-        border-radius: 10px;
-        padding: 5px;
-        margin: 5px;
-
-        background: rgba(0, 0, 0, 0.4);
-        animation-duration: 0.2s;
-    }
-
-    .confirm:active {
-        transform: translateY(1px);
     }
 </style>
