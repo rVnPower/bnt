@@ -1,9 +1,13 @@
 <script>
   import {dndzone} from 'svelte-dnd-action';
   import {flip} from 'svelte/animate';
+  import ButtonsForm from "./Form.svelte";
+
   const flipDurationMs = 150;
   export let items;
-  export let onDrop;
+  export let save;
+
+  let state = "" // addition, edit
 
   function handleConsider(e) {
     items = e.detail.items;
@@ -11,21 +15,31 @@
 
   function handleFinalize(e) {
     const {items:newItems} = e.detail;
-    onDrop(newItems);
+    save(newItems);
   }
 
-  function handleAddition() {
-
+  function handleAddition(newItem) {
+    save([...items, newItem]);
+    state = "";
   }
 
   function handleRemoval(name) {
     for (let i = 0; i < items.length; i++) {
       if (name === items[i].name) {
         items.splice(i, 1);
-        onDrop(items);
+        save(items);
         break;
       }
     }
+  }
+
+  function getButtonsName() {
+    let arr = [];
+    for (let i = 0; i < items.length; i++) {
+      arr.push(items[i].name.toLowerCase());
+    }
+
+    return arr;
   }
 
   function transformDraggedElement(draggedEl, data, index) {
@@ -39,7 +53,7 @@
         on:consider={handleConsider}
         on:finalize={handleFinalize}
     >
-        {#each items as item(item.name)}
+        {#each items as item(item.id)}
             <div animate:flip={{duration:flipDurationMs}}>
                 <div class="card">
                     {item.name}
@@ -56,11 +70,15 @@
         {/each}
     </div>
     <div>
-        <div class="card add" on:click={handleAddition}>
+        <div class="card add" on:click={() => state = "addition"}>
             +
         </div>
     </div>
 </section>
+
+{#if state === "addition"}
+  <ButtonsForm state={state} item={{}} save={handleAddition}/>
+{/if}
 
 <style>
     section {
@@ -69,19 +87,19 @@
         flex-direction: column;
         gap: 8px;
 
-        background: rgba(0, 0, 0, 0.40);
+        background-color: rgba(255, 255, 255, 0.2);
+        opacity: 0.9;
         border-radius: 10px;
-        border: 1px solid #333;
         padding: 0.5rem 0.75rem;
+        transition: opacity 0.2s;
 
     }
 
-    section:focus {
-        outline: none;
+    section:hover {
+      opacity: 1;
     }
 
     .card {
-        background: rgba(0, 0, 0, 0.50);
         cursor: pointer;
 
         display: flex;
@@ -90,14 +108,11 @@
 
         width: 100%;
         padding: 10px;
-
-        border: 2px solid #222;
         border-radius: 8px;
 
     }
 
     .card:hover {
-        border-color: #333;
         transform: translateY(-3px);
     }
 
@@ -109,7 +124,7 @@
         justify-content: center;
 
         font-size: 2em;
-        border: 2px dashed #222;
+        border: 2px dashed #888;
         cursor: pointer;
     }
 
