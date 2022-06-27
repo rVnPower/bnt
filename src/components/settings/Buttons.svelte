@@ -1,21 +1,36 @@
 <script>
-	import {dndzone} from 'svelte-dnd-action';
-	import {flip} from 'svelte/animate';
-	const flipDurationMs = 150;
-	export let items;
-	export let onDrop;
+  import {dndzone} from 'svelte-dnd-action';
+  import {flip} from 'svelte/animate';
+  const flipDurationMs = 150;
+  export let items;
+  export let onDrop;
 
-	function handleConsider(e) {
-		items = e.detail.items;
-	}
-	function handleFinalize(e) {
-		const {items:newItems} = e.detail;
-		onDrop(newItems);
-	}
-    // This is the JS way to style the dragged element, notice it is being passed into the dnd-zone
-    function transformDraggedElement(draggedEl, data, index) {
-        draggedEl.querySelector(".card").style.transform = "rotate(15deg)";
+  function handleConsider(e) {
+    items = e.detail.items;
+  }
+
+  function handleFinalize(e) {
+    const {items:newItems} = e.detail;
+    onDrop(newItems);
+  }
+
+  function handleAddition() {
+
+  }
+
+  function handleRemoval(name) {
+    for (let i = 0; i < items.length; i++) {
+      if (name === items[i].name) {
+        items.splice(i, 1);
+        onDrop(items);
+        break;
+      }
     }
+  }
+
+  function transformDraggedElement(draggedEl, data, index) {
+      draggedEl.querySelector(".card").style.transform = "rotate(15deg)";
+  }
 </script>
 
 <section>
@@ -29,7 +44,7 @@
                 <div class="card">
                     {item.name}
                     <div class="tray">
-                        <div class="delete" on:click={() => console.log("remove")}>
+                        <div class="delete" on:click={handleRemoval(item.name)}>
                             <img src="assets/trash.png" alt="D" width="20" height="23"/>
                         </div>
                         <div class="edit" on:click={() => console.log("asd")}>
@@ -41,7 +56,7 @@
         {/each}
     </div>
     <div>
-        <div class="card add">
+        <div class="card add" on:click={handleAddition}>
             +
         </div>
     </div>
@@ -120,6 +135,6 @@
 
     .tray > div:hover {
         transform: translateY(-1px);
-      }
+    }
 
 </style>
