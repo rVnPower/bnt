@@ -13,13 +13,20 @@
   }
 
   function handleSubmit() {
-    if (item.iconUrl == false || item.url != false) {
+    if (item.iconUrl == false && item.url != false) {
       item.iconUrl = `${item.url}/favicon.ico`;
       item.iconW = "40";
       item.iconH = "40"
     } else if (item.iconUrl == false) {
       item.iconUrl = "assets/default-icon.png";
       item.iconW = "25";
+      item.iconH = "40"
+    }
+
+    if (item.iconW == false) {
+      item.iconW = "40"
+    }
+    if (item.iconH == false) {
       item.iconH = "40"
     }
     save(item);
